@@ -1,0 +1,17 @@
+{
+	"cmd" : ["g++ -std=c++17 $file_name -o $file_base_name && timeout 4s ./$file_base_name<../../input.txt>../../output.txt"],"selector" : "source.cpp",
+	"shell":true,
+	"working_dir" : "$file_path"
+}
+key bindings
+[
+   {
+       "keys": ["alt+1"],
+       "command": "terminus_open",
+       "args" : {
+           "cmd": "bash",
+           "cwd": "${file_path:${folder}}",
+           "panel_name": "Terminus"
+       }
+   }
+] 
