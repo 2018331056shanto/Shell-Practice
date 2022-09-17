@@ -1,3 +1,5 @@
+
+
 echo "Do you want to Install |||--> Google Chrome <---||| ,If want press ||--->  y  <---|| or press ||--->  n <---|| to continue"
       read press
       if [ $press == "y" ];then
@@ -8,6 +10,46 @@ echo "Do you want to Install |||--> Google Chrome <---||| ,If want press ||---> 
 echo "--------Finished Installing Google-Chrome-------------"
 
 fi
+
+ echo "Do you want to Install |||--> Docker <---||| ,If want press ||-    -->  y  <---|| or press ||--->  n <---|| to continue"
+         read press
+         if [ $press == "y" ];then
+        echo "Yeah !! Started to install Docker"
+        echo "--------------------------------------------------"
+	sudo apt-get remove docker docker-engine docker.io containerd run
+	sudo apt-get update
+	sudo apt-get
+
+	install apt-transport-https ca-certificates gnupg-agent software-properties-common       	
+
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+	sudo apt-get update
+
+	sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+	sudo usermod -aG docker $USER
+
+
+echo "------------------------------------------------"
+docker --version
+   echo "--------Finished Installing Docker-------------"
+
+echo  "---------Installing Docker Compose--------------"
+
+
+sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose   
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+echo "--------------------------------------------------"
+
+echo $(docker-compose --version)
+echo "------------Finished Installing Docker Compose---------"
+
+   fi
+
 
    echo "Do you want to Install ||---> Git <---|| ,If want press ||--->  y <---|| or press ||--->  n <---||to continue"
    read press
