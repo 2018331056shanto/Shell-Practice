@@ -113,9 +113,9 @@ if [ $press == "y" ];then
 echo "Yeah !! Started to install JAVA"
 echo "--------------------------------------------------" 
 sudo apt update 
-sudo apt install default-jdk
+sudo apt install openjdk-17-jdk
 sudo apt update
-sudo apt install default-jre
+sudo apt install openjdk-17-jre
 echo "--------------------------------------------------"
 echo $(java --version)
 echo "----------------------Finished Installing Java----------------------------"
@@ -142,7 +142,7 @@ echo "--------------------------------------------------"
 sudo apt update
 sudo apt install golang
 echo "--------------------------------------------------"
-echo $(go --version)
+echo $(go version)
 echo "----------------------Finished Installing Go----------------------------"
 fi
 echo "Do you want to Install ||---> NVM Node <---||, If want press ||---> y <---|| or press ||---> n <---||to continue"
@@ -251,19 +251,17 @@ fi
 
 read press
 if [ $press == "y" ];then
- echo "Yeah !! Started to install Mongodb"
+ echo "Yeh !! Started to install Mongodb"
  echo "--------------------------------------------------"
+
+sudo apt update
+sudo apt upgrade -y
 wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-
+sudo apt-get install gnupg
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-
-sudo apt-get update
-
-sudo apt-get install -y mongodb-org
-
-sudo systemctl start mongod
-
-sudo systemctl status mongod
+sudo apt update
+curl -LO http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.20_amd64.deb
+sudo dpkg -i ./libssl1.1_1.1.1-1ubuntu2.1~18.04.20_amd64.deb
 
 echo "-----------> Installing Mongodb COmpass <-----------"
  wget https://downloads.mongodb.com/compass/mongodb-compass_1.28.1_amd64.deb
