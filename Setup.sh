@@ -335,4 +335,17 @@ echo "Do you want to Install ||--->  Maven <---||, If want press ||---> y <---||
         echo "-----------Finished Installing Maven----------------"
    
         fi
+echo "Do you want to Install ||---> LaTex <---||,If want press ||---> y <---|| or press ||---> n <---||to continue"
+read press
+ if [ $press == "y" ];then
+echo "Yeah !! Started to install LaTex"
+echo "--------------------------------------------------"
+sudo add-apt-repository ppa:jonathonf/texlive
+sudo apt update
+sudo apt install texlive-full
+
+echo "--------------------------------------------------"
+latex --version
+echo "----------------------Finished Installing C++----------------------------"
+fi
 
