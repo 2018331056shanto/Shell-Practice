@@ -207,18 +207,7 @@ sudo apt upgrade
   3 echo $(code --version)
   4 echo "--------------------Finished Installing VS-CODE------------------------------"
 fi
-echo "Do you want to Install ||--->  Intellij <---||, If want press ||---> y <---|| or press ||---> n <--- to continue"
- read press
- if [ $press == "y" ];then
- echo "Yeah !! Started to install Intellij"
- echo "--------------------------------------------------"
 
-sudo apt update
- sudo apt install vim apt-transport-https curl wget software-properties-common
-sudo add-apt-repository ppa:mmk2410/intellij-idea -y
-sudo apt install intellij-idea-community -y
-echo "-----------------------Finished Installing Intellij-Idea-Community------------------"
-fi
 
 echo "Do you want to Install ||---> Mysql <---||, If want press ||---> y <---|| or press ||---> n <---|| to continue"
  read press
@@ -254,18 +243,14 @@ if [ $press == "y" ];then
  echo "Yeh !! Started to install Mongodb"
  echo "--------------------------------------------------"
 
-sudo apt update
-sudo apt upgrade -y
-wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-sudo apt-get install gnupg
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-sudo apt update
-curl -LO http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.20_amd64.deb
-sudo dpkg -i ./libssl1.1_1.1.1-1ubuntu2.1~18.04.20_amd64.deb
+sudo apt-get install gnupg curl
+curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
+   --dearmor
+   echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+   sudo apt-get update
+   sudo apt-get install -y mongodb-org
 
-echo "-----------> Installing Mongodb COmpass <-----------"
- wget https://downloads.mongodb.com/compass/mongodb-compass_1.28.1_amd64.deb
-sudo apt install ./mongodb-compass_1.28.1_amd64.deb
 
 echo "-------Finished Installing Mongodb----------"
 
@@ -343,6 +328,23 @@ echo "--------------------------------------------------"
 sudo add-apt-repository ppa:jonathonf/texlive
 sudo apt update
 sudo apt install texlive-full
+
+echo "--------------------------------------------------"
+latex --version
+echo "----------------------Finished Installing C++----------------------------"
+fi
+
+echo "Do you want to Install ||---> Brave Browser <---||,If want press ||---> y <---|| or press ||---> n <---||to continue"
+read press
+ if [ $press == "y" ];then
+echo "Yeah !! Started to install LaTex"
+echo "--------------------------------------------------"
+sudo apt install curl
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install brave-browser
+
 
 echo "--------------------------------------------------"
 latex --version
