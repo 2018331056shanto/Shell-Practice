@@ -399,6 +399,10 @@ sudo wget https://dlcdn.apache.org/kafka/3.9.0/kafka-3.9.0-src.tgz
 tar -xvzf kafka-3.9.0-src.tgz
 sudo mv kafka-3.9.0-src.tgz /opt/kafka
 
+/opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties
+/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties
+
+
 
 # Define the path to the systemd service file
 SERVICE_FILE="/etc/systemd/system/zookeeper.service"
