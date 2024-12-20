@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 echo "Do you want to Install |||--> Google Chrome <---||| ,If want press ||--->  y  <---|| or press ||--->  n <---|| to continue"
       read press
@@ -389,3 +389,99 @@ echo "--------------------------------------------------"
 echo "----------------------Finished Installing Postgres----------------------------"
 fi
 
+echo "Do you want to Install ||---> KAFKA  <---||,If want press ||---> y <---|| or press ||---> n <---||to continue"
+read press
+ if [ $press == "y" ];then
+echo "Yeah !! Started to install Postman"
+echo "--------------------------------------------------"
+sudo apt update
+sudo wget https://dlcdn.apache.org/kafka/3.9.0/kafka-3.9.0-src.tgz
+tar -xvzf kafka-3.9.0-src.tgz
+sudo mv kafka-3.9.0-src.tgz /opt/kafka
+
+
+# Define the path to the systemd service file
+SERVICE_FILE="/etc/systemd/system/zookeeper.service"
+
+# Create the zookeeper service file with the required content
+sudo bash -c "cat > $SERVICE_FILE <<EOL
+[Unit]
+Description=Apache Zookeeper Service
+After=network.target
+
+[Service]
+ExecStart=/opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties
+ExecStop=/opt/kafka/bin/zookeeper-server-stop.sh
+Restart=always
+User=shanto
+Group=shanto
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+EOL"
+
+
+
+# Print a message that the service file is created
+echo "Zookeeper service file created successfully."
+
+SERVICE_FILE1="/etc/systemd/system/kafka.service"
+
+sudo bash -c "cat > $SERVICE_FILE1 <<EOL
+[Unit]
+Description=Apache Kafka Service
+After=zookeeper.service
+
+[Service]
+ExecStart=/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties
+ExecStop=/opt/kafka/bin/kafka-server-stop.sh
+Restart=always
+User=shanto
+Group=shanto
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+EOL"
+
+echo "Kafka service file created successfully."
+
+sudo chown -R shanto:shanto /opt/kafka
+sudo chmod -R 755 /opt/kafka
+
+
+
+# Reload systemd to pick up the new service file
+sudo systemctl daemon-reload
+echo "Systemd daemon reloaded."
+
+# Start the Zookeeper service
+sudo systemctl start zookeeper
+echo "Zookeeper service started."
+
+# Enable the Zookeeper service to start on boot
+sudo systemctl enable zookeeper
+echo "Zookeeper service enabled to start on boot."
+
+# Check the status of the Zookeeper service
+sudo systemctl status zookeeper
+
+
+sudo systemctl daemon-reload
+sudo systemctl start kafka
+sudo systemctl enable kafka
+sudo systemctl status kafka
+
+
+
+
+
+
+cd Downloads
+	sudo rm -rf /opt/Postman/
+
+
+echo "--------------------------------------------------"
+echo "----------------------Finished Installing Postgres----------------------------"
+fi
