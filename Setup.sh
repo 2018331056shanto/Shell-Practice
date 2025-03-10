@@ -382,7 +382,24 @@ echo "--------------------------------------------------"
 sudo apt update
 curl -O https://dl.pstmn.io/download/latest/linux_64
 cd Downloads
-	sudo rm -rf /opt/Postman/
+sudo rm -rf /opt/Postman/
+
+ echo "sudo tar xvf Postman-<your version>.tar.gz -C /opt/
+ 	sudo ln -sf /opt/Postman/app/Postman /usr/bin/postman
+  	nano ~/.local/share/applications/postman.desktop
+[Desktop Entry]
+	Encoding=UTF-8
+	Name=Postman
+	X-GNOME-FullName=Postman API Client
+	Exec=/usr/bin/postman
+	Icon=/opt/Postman/app/resources/app/assets/icon.png
+	Terminal=false
+	Type=Application
+	Categories=Development;
+
+
+ "
+ 
 
 
 echo "--------------------------------------------------"
